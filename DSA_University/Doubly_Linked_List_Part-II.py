@@ -27,16 +27,22 @@ class DoublyLinkList:
         self.length+=1
 
     def addToFront(self, value):
-        node= DoubleHeadedNode(value,None,self.Head)
-        self.Head.prev=node
-        self.Head=node
-        self.length+=1
+        if self.isEmpty():
+            self.addElement(value)
+        else:
+            node = DoubleHeadedNode(value, None, self.Head)
+            self.Head.prev = node
+            self.Head = node
+            self.length += 1
 
     def addToLast(self, value):
-        node = DoubleHeadedNode(value,self.Tail,None)
-        self.Tail.next=node
-        self.Tail=node
-        self.length+=1
+        if self.isEmpty():
+            self.addElement(value)
+        else:
+            node = DoubleHeadedNode(value,self.Tail,None)
+            self.Tail.next=node
+            self.Tail=node
+            self.length+=1
 
     def createArray(self)->[int]:
         node = self.Head
@@ -47,6 +53,8 @@ class DoublyLinkList:
         return arrayFromList
 
 ListOfNodes = DoublyLinkList()
+ListOfNodes.addToFront(999)
+print(ListOfNodes.createArray())
 ListOfNodes.addElement(23)
 print(ListOfNodes.createArray())
 ListOfNodes.addElement(46)
