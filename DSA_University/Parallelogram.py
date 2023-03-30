@@ -34,3 +34,10 @@ triangle1:RightTriangle = RightTriangle(3,4)
 print(triangle1.Area())
 print(triangle1.calcHypotenuse())
 print(triangle1.Perimeter())
+
+rectangle1: Rectangle = RightTriangle(3,4)   # this is fine, because RightTriangle is a Rectangle, but not the other way around
+                                             # however because variable is of type Rectangle, we cannot access Triangle
+                                             # specific method.
+triangle2:RightTriangle = Rectangle(120,240) # This raises an error
+
+
