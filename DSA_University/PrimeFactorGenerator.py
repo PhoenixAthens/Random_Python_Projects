@@ -29,5 +29,5 @@ while True:
 
 print("\n")
 # easy approach to iterating a generator
-for i in primeFactorGenerator(5_000):
+for i in primeFactorGenerator(999999937):
     print(i,end=" ")
