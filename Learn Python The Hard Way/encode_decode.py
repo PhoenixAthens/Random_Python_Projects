@@ -13,9 +13,8 @@ def process(language_file,encoding,errors):
         printLine(line,encoding,errors)
         return process(language_file,encoding,errors)
 
-languageFile = open("Languages.txt",encoding="utf-8")
+languageFile = open("Languages.txt", encoding="utf-8")
 process(languageFile,encodingMain,error)
-
 
 
 
