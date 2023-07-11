@@ -1,4 +1,6 @@
 import math
+import os
+
 # while-loop
 n : int = 1
 while n<=25:
@@ -165,3 +167,55 @@ def LinearFib(n:int):
     curr,prev = LinearFib(n-1)
     return curr+prev,curr
 print(f"Fibonacci number 10: {LinearFib(10)[0]}")
+
+## Maximum contiguous sum from an array
+arrayOfValues:[int] = [-6, -22, 1, 6, -5, 3, 4]
+lengthOfArray:int = len(arrayOfValues)
+def Summer(arr:[int],length:int):
+    maxSum:int = arr[0]
+    if length == 1:
+        return maxSum
+    for i in range(0, length):
+        for j in range(i, length):
+            subSeqSum: int = 0
+            for k in range(i, j+1):
+                subSeqSum +=arr[k]
+                maxSum = max(maxSum, subSeqSum)
+    return maxSum
+print(f"Max sum of contiguous subArray: {Summer(arrayOfValues,lengthOfArray)}")
+
+## Different Implementation for Maximum Contiguous Subarray sum
+def Winter(arr:[int], length:int):
+    maxSum: int = arr[0]
+    if length == 1:
+        return maxSum
+    for i in range(0,length):
+        subSeq = 0
+        for j in range(i, length):
+            subSeq += arr[j]
+            maxSum = max(subSeq,maxSum)
+    return maxSum
+print(f"Maximum Contiguous SubArray sum: {Winter(arrayOfValues, lengthOfArray)}")
+
+# Divide and Conquer to solve Maximum Contiguous Subarray sum
+def maxContiSum(array:[int], low:int, high:int)->int: # high has to be len(array)-1
+    if low == high:
+        return array[low]
+    mid = (low+high)//2
+    subSeqSum = 0
+    maxLeft = maxRight = -123456
+    for i in range(mid,low-1,-1):
+        subSeqSum += array[i]
+        maxLeft = max(subSeqSum,maxLeft)
+
+    subSeqSum = 0
+    for i in range(mid+1,high+1):
+        subSeqSum += array[i]
+        maxRight = max(maxRight, subSeqSum)
+
+    left = maxContiSum(array, low, mid)
+    right = maxContiSum(array , mid+1, high)
+    return max(left, maxLeft+maxRight, right)
+print(f"Maximum Contiguous SubArray Sum of {arrayOfValues} is {maxContiSum(arrayOfValues,0,len(arrayOfValues)-1)}")
+# Maximum Contiguous SubArray Sum of [-6, -22, 1, 6, -5, 3, 4] is 9
+
