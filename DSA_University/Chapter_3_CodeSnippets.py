@@ -219,3 +219,38 @@ def maxContiSum(array:[int], low:int, high:int)->int: # high has to be len(array
 print(f"Maximum Contiguous SubArray Sum of {arrayOfValues} is {maxContiSum(arrayOfValues,0,len(arrayOfValues)-1)}")
 # Maximum Contiguous SubArray Sum of [-6, -22, 1, 6, -5, 3, 4] is 9
 
+# Iterative program to calculate factorial
+def factorial(n)->int:
+    index: int = 1
+    factorialVal:int = 1
+    while index <= n:
+        factorialVal*=index
+        index+=1
+    return factorialVal
+print(f"The factorial of {5} is {factorial(5)} ")
+
+## Compute the highest power of a factor (fact>=2) that divides a natural number (num>=2)
+def powerOfFactor(num, fact):
+    if num<fact:
+        return 0
+    if num == fact:
+        return 1
+    elif num % fact == 0:
+        return powerOfFactor(num//fact,fact)+1
+    return 0
+print(f"highest Power of factor 2 in 1024 is {powerOfFactor(1024,2)}") #10
+print(f"highest Power of factor 5 in 1024 is {powerOfFactor(1024,5)}") #0
+print(f"highest Power of factor 4 in 1024 is {powerOfFactor(1024,4)}") #5
+print(f"highest Power of factor 16 in 1024 is {powerOfFactor(1024,16)}") #2
+
+## Kadane's algorithm to calculate maximum contiguous sub-array sum
+def KadaneConti(array:[int]):
+    subSeqSum: int = 0
+    maxSum: int = 0
+    for i in array:
+        subSeqSum = max(subSeqSum+i, 0)
+        maxSum = max(maxSum,subSeqSum)
+    print(f"Max Conti Sum of {array} is {maxSum}")
+
+KadaneConti(arrayOfValues)
+
