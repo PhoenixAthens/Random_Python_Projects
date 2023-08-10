@@ -160,7 +160,7 @@ def qSort(arr:[int], left:int, right:int):
     qSort(arr,left,partIndex-1) # this is the recursive call that takes care of sorting array to the left of pivot
     qSort(arr,partIndex+1,right) # this recursive call takes care of sorting array to the right of the pivot
 def partition(arr:[int], left:int, right:int):
-    pivot=arr[left] #the first element of array or its sub-arrays is choosen as the pivot
+    pivot=arr[left] #the first element of array or its sub-arrays is chosen as the pivot
     # left pointer = i
     i = left + 1 # because 'left' is pivot we start our from an index after it
     # right pointer = j
@@ -181,6 +181,32 @@ def partition(arr:[int], left:int, right:int):
     # and our right pointer has reached the index where arr[j] < pivot, thus we swap arr[j] with pivot
     arr[left],arr[j]=arr[j],arr[left]
     return j
+
+# merge Sort
+def mergeSort(sequence:[int]):
+    seqLength = len(sequence)
+    if(seqLength<=1):
+        return
+    mid = seqLength//2
+    lower = sequence[:mid]
+    upper = sequence[mid:]
+    mergeSort(lower)
+    mergeSort(upper)
+    mergeMain(lower, upper, sequence)
+
+def mergeMain(leftPart:[int], rightPart:[int], allTogether:[int]):
+    a=b=0
+    lenLeft = len(leftPart)
+    lenRight = len(rightPart)
+    lenMain = len(allTogether)
+    while a+b < lenMain:
+        if b==lenRight or (a<lenLeft and leftPart[a]<rightPart[b]):
+            allTogether[a+b],a = leftPart[a],a+1
+        else:
+            allTogether[a+b],b = rightPart[b],b+1
+
+
+
 
 
 sampleList:[int] = [3, 5, 7, 9, 12, 15, 18, 21, 23, 25, 28, 31, 34, 37, 40, 43, 46, 49, 52, 55]
@@ -229,3 +255,22 @@ print(sampleList_10)
 sampleList_11 = [12,3,22,44,15,13,7,45,77,33]
 quickSort(sampleList_11)
 print(sampleList_11)
+
+lower = sampleList_11[:5] # from 0 till 5 (excluding 5)
+higher = sampleList_11[5:] # from 5 till end (including end and beginning)
+print(f"Main: {sampleList_11}, lower: {lower}, higher: {higher}")
+
+print("-----------------")
+sampleList_12 = [45, 12, 67, 89, 34, 23, 90, 11, 56, 78, 3, 6, 9, 15, 18, 21, 24, 27, 30, 33]
+mergeSort(sampleList_12)
+print(sampleList_12)
+
+sampleList_13 = [23, -45, 12, 56, 98, -2, 34, 76, -12, 45, 67, 89, -34, 56, 78,
+                 -90, 12, 34, -56, 78, 90, -12, 34, -56, 78, 90, -12, 34, -56, 78,
+                 90, -12, 34, -56, 78, 90, -12, 34, -56, 78, 90,-12 ,34 ,-56 ,78 ,90
+    ,-12 ,34 ,-56 ,78 ,90 ,-12 ,34 ,-56 ,78 ,90 ,-12 ,34 ,-56 ,78 ,90 ,-12 ,34 ,-56
+    ,78 ,90 ,-12 ,34 ,-56 ,78 ,90 ,-12 ,34 ,-56 ,78 ,90 ,-12 ,34 ,-56 , 78 ,90 ,-12 ,34 ,-56 ,78]
+mergeSort(sampleList_13)
+print(sampleList_13)
+
+
